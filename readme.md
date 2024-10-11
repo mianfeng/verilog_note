@@ -240,3 +240,20 @@ endmodule
 
 通过使用 `generate` 块，设计者可以更高效地管理大规模的硬件设计，尤其是当模块的结构具有重复性或依赖某些静态参数时。
 
+  6. **总结**
+```verilog
+module top_module (
+    input [3:0] in,
+    output [2:0] out_both,
+    output [3:1] out_any,
+    output [3:0] out_different
+);
+
+    assign out_any = in[3:1] | in[2:0];
+    assign out_both = in[2:0] & in[3:1];
+    assign out_different = in ^ {in[0], in[3:1]};
+    
+endmodule
+
+```
+通过对数组整体的操作，达到目的，比起按位数来一位一位赋值高效很多，在v的学习中这个很重要
