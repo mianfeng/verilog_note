@@ -1,25 +1,10 @@
-module top_module (
-    input ring,
-    input vibrate_mode,
-    output ringer,       // Make sound
-    output motor         // Vibrate
-);
-always @(*) begin
-    if (ring == 1 ) begin
-        if (vibrate_mode == 1) begin
-            ringer = 0;
-            motor = 1;
-        end
-        else begin
-            ringer = 1;
-            motor = 0;
-        end
-    end
-    else begin
-        ringer = 0;
-        motor = 0;
-    end
-end
-    
+module top_module( 
+    input [99:0] in,
+    output [98:0] out_both,
+    output [99:1] out_any,
+    output [99:0] out_different );
+    assign out_both[98:0] = in[98:0]&in[99:1];
+    assign out_any[99:1] = in[99:1]|in[98:0];
+    assign out_different[99:0] = in[99:0]^{in[0],in[99:1]};
 
 endmodule
